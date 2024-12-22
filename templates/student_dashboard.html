@@ -94,7 +94,7 @@
 
 <div class="container mt-5">
    
-    <img src="{{ url_for('get_photo', photo_id=student['photo_id'] | string) }}" alt="Student Photo">
+   
 
 
 
@@ -201,6 +201,20 @@
         {% else %}
             <p class="text-muted">No upcoming meetings available.</p>
         {% endif %}
+        <section class="mt-5">
+            <h2>Notifications</h2>
+            <div class="notification-card">
+                {% for notification in notifications %}
+                    <h5><strong>{{ notification.title }}</strong></h5>
+                    <p>{{ notification.message }}</p>
+                    <small>{{ notification.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</small><br>
+                    {% if notification.google_form_link %}
+                        <a href="{{ notification.google_form_link }}" class="btn btn-info btn-sm mt-2" target="_blank">Open Google Form</a>
+                    {% endif %}
+                    <hr>
+                {% endfor %}
+            </div>
+        </section>
     </div>
     <h3 class="mt-5">Volunteer Details</h3>
     {% if volunteer_details %}
